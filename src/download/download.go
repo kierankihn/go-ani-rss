@@ -60,7 +60,7 @@ func proceedRssItem(item *gofeed.Item, itemConfig settings.ItemConfig) error {
 	}
 
 	// convert download path
-	path, err := format.FormatPath(item.Title, itemConfig.Name, itemConfig.Path)
+	path, err := format.FormatPath(item.Title, itemConfig)
 	if err != nil {
 		return err
 	}

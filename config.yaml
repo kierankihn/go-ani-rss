@@ -3,3 +3,4 @@ downloads:
   - name: name     # 番剧名称
     path: path     # 存储路径
     filter: filter # 正则表达式匹配
+    season: season # 季度

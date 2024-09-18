@@ -11,6 +11,7 @@ type ItemConfig struct {
 	Name   string `yaml:"name"`
 	Filter string `yaml:"filter"`
 	Path   string `yaml:"path"`
+	Season int    `yaml:"season"`
 }
 
 type AppConfig struct {
