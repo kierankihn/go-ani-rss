@@ -32,7 +32,7 @@ func main() {
 			fmt.Println(err)
 		}
 
-		err = download.ProceedRssItems(feed)
+		err = download.ProceedRssItems(feed, settings.Config.ItemConfigs)
 		if err != nil {
 			fmt.Println(err)
 		}

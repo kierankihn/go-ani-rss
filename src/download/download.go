@@ -75,9 +75,9 @@ func proceedRssItem(item *gofeed.Item, itemConfig settings.ItemConfig) error {
 	return nil
 }
 
-func ProceedRssItems(feed *gofeed.Feed) error {
+func ProceedRssItems(feed *gofeed.Feed, ItemConfigs []settings.ItemConfig) error {
 	for _, item := range feed.Items {
-		for _, itemConfig := range settings.Config.ItemConfigs {
+		for _, itemConfig := range ItemConfigs {
 			reg, err := regexp.Compile(itemConfig.Filter)
 			if err != nil {
 				return err
