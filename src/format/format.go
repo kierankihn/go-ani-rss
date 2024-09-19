@@ -9,17 +9,17 @@ import (
 	"go-ani-rss/src/settings"
 )
 
-func FormatPath(originName string, ItemConfig settings.ItemConfig) (string, error) {
+func FormatPath(originName string, itemConfig settings.ItemConfig) (string, error) {
 	// compile regexp
 	const pattern = `\[ANi\] (.*) - (\d{2}) [^\.]*\.(.*)`
 	reg, _ := regexp.Compile(pattern)
 
 	matches := reg.FindStringSubmatch(originName)
 
-	newName := originName
+	newName := itemConfig.Path
 
 	if len(matches) == 4 && matches[0] == originName {
-		name, seasonId, episodeId, extName := ItemConfig.Name, strconv.Itoa(ItemConfig.Season), matches[2], matches[3]
+		name, seasonId, episodeId, extName := itemConfig.Name, strconv.Itoa(itemConfig.Season), matches[2], matches[3]
 
 		newName = strings.ReplaceAll(newName, `{name}`, name)
 		newName = strings.ReplaceAll(newName, `{season}`, seasonId)
