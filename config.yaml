@@ -1,6 +1,6 @@
-last_download_time: 1970-01-01T00:00:00Z # 最后下载时间，避免重复下载
 downloads: 
   - name: name     # 番剧名称
     path: path     # 存储路径
     filter: filter # 正则表达式匹配
     season: season # 季度
+    progress: 0    # 下载进度

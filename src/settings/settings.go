@@ -2,21 +2,20 @@ package settings
 
 import (
 	"os"
-	"time"
 
 	"gopkg.in/yaml.v3"
 )
 
 type ItemConfig struct {
-	Name   string `yaml:"name"`
-	Filter string `yaml:"filter"`
-	Path   string `yaml:"path"`
-	Season int    `yaml:"season"`
+	Name     string `yaml:"name"`
+	Filter   string `yaml:"filter"`
+	Path     string `yaml:"path"`
+	Season   int    `yaml:"season"`
+	Progress int    `yaml:"progress"`
 }
 
 type AppConfig struct {
-	LastDownloadTime time.Time    `yaml:"last_download_time"`
-	ItemConfigs      []ItemConfig `yaml:"downloads"`
+	ItemConfigs []ItemConfig `yaml:"downloads"`
 }
 
 var (
@@ -38,8 +37,6 @@ func ParserSettings() error {
 }
 
 func SaveSettings() error {
-	Config.LastDownloadTime = time.Now()
-
 	data, err := yaml.Marshal(&Config)
 	if err != nil {
 		return err

@@ -2,39 +2,32 @@ package main
 
 import (
 	"fmt"
-	"go-ani-rss/src/download"
-	"go-ani-rss/src/settings"
 	"time"
 
-	"github.com/mmcdole/gofeed"
+	"go-ani-rss/src/rss"
+	"go-ani-rss/src/settings"
 )
 
-var (
-	rssFeedUrl   string
-	feedProvider *gofeed.Parser
-)
-
-func init() {
-	rssFeedUrl = "https://api.ani.rip/ani-download.xml"
-
-	feedProvider = gofeed.NewParser()
-}
+var ()
 
 func main() {
 	err := settings.ParserSettings()
 	if err != nil {
 		fmt.Println(err)
+		return
 	}
 
 	for {
-		feed, err := feedProvider.ParseURL(rssFeedUrl)
+		err = rss.ProceedRssItems()
 		if err != nil {
 			fmt.Println(err)
+			continue
 		}
 
-		err = download.ProceedRssItems(feed, settings.Config.ItemConfigs)
+		err = settings.SaveSettings()
 		if err != nil {
 			fmt.Println(err)
+			continue
 		}
 
 		time.Sleep(60 * time.Second)
