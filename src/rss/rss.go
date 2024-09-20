@@ -46,6 +46,8 @@ func parserRssFeed() error {
 	const pattern = `\[ANi\] (.*) - (\d{2}) [^\.]*\.(.*)`
 	reg, _ := regexp.Compile(pattern)
 
+	ItemInfos = nil
+
 	for _, item := range feed.Items {
 		matches := reg.FindStringSubmatch(item.Title)
 
@@ -72,9 +74,7 @@ func parserRssFeed() error {
 					itemInfo.Path = strings.ReplaceAll(itemInfo.Path, `{episode}`, strconv.Itoa(itemInfo.Episode))
 					itemInfo.Path = strings.ReplaceAll(itemInfo.Path, `{ext}`, itemInfo.Ext)
 
-					if itemInfo.Episode > itemConfig.Progress {
-						ItemInfos = append(ItemInfos, itemInfo)
-					}
+					ItemInfos = append(ItemInfos, itemInfo)
 				}
 			}
 		}
@@ -107,13 +107,13 @@ func ProceedRssItems() error {
 	}
 
 	for _, itemInfo := range ItemInfos {
-		err := downloadRssItem(itemInfo)
-		if err != nil {
-			return err
+		if itemInfo.ItemConfig.Progress < itemInfo.Episode {
+			err := downloadRssItem(itemInfo)
+			if err != nil {
+				return err
+			}
 		}
 	}
-
-	ItemInfos = nil
 
 	return nil
 }
