@@ -71,7 +71,7 @@ func parserRssFeed() error {
 					itemInfo.Path = itemConfig.Path
 					itemInfo.Path = strings.ReplaceAll(itemInfo.Path, `{name}`, itemInfo.Name)
 					itemInfo.Path = strings.ReplaceAll(itemInfo.Path, `{season}`, fmt.Sprintf("%02d", itemInfo.Season))
-					itemInfo.Path = strings.ReplaceAll(itemInfo.Path, `{episode}`, strconv.Itoa(itemInfo.Episode))
+					itemInfo.Path = strings.ReplaceAll(itemInfo.Path, `{episode}`, fmt.Sprintf("%02d", itemInfo.Episode))
 					itemInfo.Path = strings.ReplaceAll(itemInfo.Path, `{ext}`, itemInfo.Ext)
 
 					ItemInfos = append(ItemInfos, itemInfo)
